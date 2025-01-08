@@ -28,6 +28,7 @@ public class PlayerLogger implements Listener {
   public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
     UUID playerUUID = event.getPlayer().getUniqueId();
     String playerName = event.getPlayer().getName();
+    String worldName = event.getPlayer().getWorld().getName(); // Get the current world name
     String command = event.getMessage(); // The full command the player entered
     String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
@@ -38,7 +39,7 @@ public class PlayerLogger implements Listener {
     }
 
     // Log the command to the player's file
-    logToPlayerFile(playerUUID, playerName, "[" + timestamp + "] " + playerName + ": " + command);
+    logToPlayerFile(playerUUID, playerName, "[" + timestamp + "] [" + worldName + "] " + playerName + ": " + command);
 
     // Optionally, send a confirmation to the player
     // event.getPlayer().sendMessage(Component.text("Your command has been logged to your personal log file."));
